@@ -1,17 +1,19 @@
 package com.cheise_proj.bookclient.event.listener;
 
-import com.cheise_proj.bookclient.event.process.BookProcessor;
 import com.cheise_proj.bookclient.model.Book;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
-@EnableBinding(BookProcessor.class)
+import java.util.function.Consumer;
+
 @Slf4j
+@Component
 public class BookListener {
-    @StreamListener(target = BookProcessor.INPUT)
-    public void handleEvent(@Payload Book book) {
-        log.info("received message {}", book);
+    @Bean
+    public Consumer<Book> handleBookEvent() {
+        return book -> log.info("received message {}", book);
     }
+
 }
+

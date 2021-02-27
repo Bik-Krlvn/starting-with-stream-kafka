@@ -11,5 +11,4 @@ spring:
           binder: kafka
           destination: BOOK_EVENT_TOPIC
           content-type: application/json
-
-
+      source: book-event-producer

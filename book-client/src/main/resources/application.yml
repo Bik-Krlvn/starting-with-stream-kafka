@@ -7,10 +7,12 @@ spring:
           brokers:
             - localhost:9092
       bindings:
-        book-event-consumer:
+        handleBookEvent-in-0:
           binder: kafka
           destination: BOOK_EVENT_TOPIC
-          content-type: application/json
+          group: b
+          consumer:
+            partitioned: true
 
 server:
   port: 8888
