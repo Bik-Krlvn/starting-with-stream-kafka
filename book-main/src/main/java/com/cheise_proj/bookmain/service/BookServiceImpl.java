@@ -1,6 +1,6 @@
 package com.cheise_proj.bookmain.service;
 
-import com.cheise_proj.bookmain.event.producer.BookProcessor;
+import com.cheise_proj.bookmain.event.process.BookProcessor;
 import com.cheise_proj.bookmain.model.Book;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.cheise_proj.bookmain.event.producer;
+package com.cheise_proj.bookmain.event.process;
 
 import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
