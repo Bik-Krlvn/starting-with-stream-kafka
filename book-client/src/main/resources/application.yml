@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    stream:
+      default-binder: kafka
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+      bindings:
+        book-event-consumer:
+          binder: kafka
+          destination: BOOK_EVENT_TOPIC
+          content-type: application/json
+
+server:
+  port: 8888
