@@ -1,0 +1,40 @@
+spring:
+  cloud:
+    stream:
+      default-binder: rabbit
+      function:
+        definition: bookCreatedConsumer;
+      bindings:
+        book-created-out-0:
+          binder: rabbit
+          group: book_created_queue
+          destination: BookCreatedEvent
+          producer:
+            requiredGroups: book_created_queue
+
+        bookCreatedConsumer-in-0:
+          destination: BookCreatedEvent
+          group: book_log_queue
+          consumer:
+            auto-bind-dlq: true
+            binding-routing-key: book.#
+            maxAttempts: 3
+            backOffInitialInterval: 500
+            backOffMaxInterval: 1000
+            backOffMultiplier: 2.0
+      rabbit:
+        bindings:
+          book-created-out-0:
+            producer:
+              binding-routing-key: book.lib
+              routing-key-expression: '''book.lib'''
+              queue-name-group-only: true
+
+          bookCreatedConsumer-in-0:
+            consumer:
+              binding-routing-key: book.#
+              queue-name-group-only: true
+
+
+  rabbitmq:
+    addresses: ${RABBIT_ENDPOINT}
